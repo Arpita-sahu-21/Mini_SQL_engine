@@ -1,0 +1,28 @@
+# Qt build folders
+MiniSQLGUI/build/
+build/
+
+# Qt Creator
+MiniSQLGUI/.qtcreator/
+.qtc_clangd/
+
+# Executables
+*.exe
+
+# Object files
+*.o
+*.obj
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Qt generated files
+*_autogen/
+moc_*
+ui_*.h
+
+# VS Code
+.vscode/
