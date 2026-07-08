@@ -3,6 +3,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iomanip>
+#include <stdexcept>
 
 Table::Table(string name, vector<string> cols)
 {
@@ -152,11 +153,37 @@ string Table::filterColumn(const vector<string>& cols,const string& columnname,c
     {
         bool match = false;
 
-        if(op == "==")
-            match = (row[filterIndex] == condition);
-        else if(op == "!=")
-            match = (row[filterIndex] != condition);
-
+        try
+        {
+            if(op == "==")
+            {
+                match = (row[filterIndex] == condition);
+            }
+            else if(op == "!=")
+            {
+                match = (row[filterIndex] != condition);
+            }
+            else if(op == ">")
+            {
+                match = (stoi(row[filterIndex]) > stoi(condition));
+            }
+            else if(op == "<")
+            {
+                match = (stoi(row[filterIndex]) < stoi(condition));
+            }
+            else if(op == ">=")
+            {
+                match = (stoi(row[filterIndex]) >= stoi(condition));
+            }
+            else if(op == "<=")
+            {
+                match = (stoi(row[filterIndex]) <= stoi(condition));
+            }
+        }
+        catch(const std::exception&)
+        {
+            return "Error: Numeric comparison can only be used on numeric values.";
+        }
         if(match)
         {
             for(int index : colIndices)
